@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="person" class="anoXML.Person"></bean>
+    <bean id="proxy" class="anoXML.PersonProxy"></bean>
+
+    <aop:config>
+        <!--配置切入点-->
+        <aop:pointcut id="eat" expression="execution(* anoXML.Person.eat(..))"/>
+        <!--配置切面-->
+        <aop:aspect ref="proxy">
+            <aop:before method="before" pointcut-ref="eat"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
